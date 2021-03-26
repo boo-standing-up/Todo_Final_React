@@ -2,23 +2,48 @@ import { useState } from "react";
 import "./styles.css";
 
 export const App = () => {
-  const [incomplateTodos, setIncomplateTodos] = useState(["もももも", "2"]);
+  const [todoText, setTodoText] = useState("");
+  const [incomplateTodos, setIncomplateTodos] = useState([]);
   const [complateTodos, setComplateTodo] = useState(["33", "hanamichi"]);
+  const onChangeTodoText = (event) => {
+    setTodoText(event.target.value);
+  };
+
+  const onClickAdd = () => {
+    if (todoText === "") return; //空だと動かないと設定
+    const newTodo = [...incomplateTodos, todoText];
+    setIncomplateTodos(newTodo);
+    setTodoText("");
+  };
+
+  // const onComplateAdd=()=>{
+  //   const genTodo=
+  // };
+
+  const onClickDelete = (index) => {
+    const newTodo = [...incomplateTodos];
+    newTodo.splice(index, 1);
+    setIncomplateTodos(newTodo);
+  };
   return (
     <>
       <div className="input_eria">
-        <input placeholder="Todoを入力" />
-        <button>追加</button>
+        <input
+          placeholder="Todoを入力"
+          value={todoText}
+          onChange={onChangeTodoText}
+        />
+        <button onClick={onClickAdd}>追加</button>
       </div>
       <div className="incomplate_aria">
         <p className="title">未完了のTODO</p>
         <ul>
-          {incomplateTodos.map((todo) => {
+          {incomplateTodos.map((todo, index) => {
             return (
               <div key={todo} className="list_row">
                 <li>{todo}</li>
                 <button>完了</button>
-                <button>削除</button>
+                <button onClick={() => onClickDelete(index)}>削除</button>
               </div>
             );
           })}
