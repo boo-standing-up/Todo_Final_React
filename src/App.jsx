@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./styles.css";
-import { inputTodo } from "./components/inputTodo";
+import { InputTodo } from "./components/InputTodo";
+import { InconplateTodos } from "./components/InconplateTodos";
 
 export const App = () => {
   const [todoText, setTodoText] = useState("");
@@ -28,25 +29,12 @@ export const App = () => {
   };
   return (
     <>
-      <inputTodo
+      <InputTodo
         todoText={todoText}
         onChange={onChangeTodoText}
         onClick={onClickAdd}
       />
-      <div className="incomplate_aria">
-        <p className="title">未完了のTODO</p>
-        <ul>
-          {incomplateTodos.map((todo, index) => {
-            return (
-              <div key={todo} className="list_row">
-                <li>{todo}</li>
-                <button>完了</button>
-                <button onClick={() => onClickDelete(index)}>削除</button>
-              </div>
-            );
-          })}
-        </ul>
-      </div>
+      <InconplateTodos todos={incomplateTodos} onClickDelete={onClickDelete} />
       <div className="complate_aria">
         <p className="title">完了のTODO</p>
         <ul>

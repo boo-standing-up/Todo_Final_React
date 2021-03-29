@@ -1,6 +1,6 @@
 import { React } from "react";
 
-export const inputTodo = (props) => {
+export const InputTodo = (props) => {
   const { todoText, onChange, onClick } = props;
   return (
     <div className="input_eria">
